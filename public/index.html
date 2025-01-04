@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login com Twitch e Firebase</title>
+    <link rel="stylesheet" type="text/css" href="styles/index.css">
+    
+</head>
+<body>
+    <div class="page-loader" style="display: flex">
+        <div class="loader">
+            <div class="loading-spinner">
+                <svg class="loading-spinner__circle-svg" viewBox="25 25 50 50">
+                    <circle class="loading-spinner__circle-stroke" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div id="live-streams">
+
+    </div>
+
+
+    <div class="live" id="liveElement" style="display: flex">
+        <!-- Área da Live -->
+        <div class="live-video">
+            <div id="twitch-embed"></div>
+            <div class="overlay-live">
+                
+            </div>
+            <div class="info">
+
+            </div>
+            <div class="controls">
+
+                <div class="controls-left">
+                    <button class="transparent toggle">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 6v12l10-6z" /></svg>
+                    </button>
+                    <button class="transparent mute">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16 21c3.527-1.547 5.999-4.909 5.999-9S19.527 4.547 16 3v2c2.387 1.386 3.999 4.047 3.999 7S18.387 17.614 16 19v2z" /><path d="M16 7v10c1.225-1.1 2-3.229 2-5s-.775-3.9-2-5zM4 17h2.697L14 21.868V2.132L6.697 7H4c-1.103 0-2 .897-2 2v6c0 1.103.897 2 2 2z" /></svg>
+                    </button>
+                </div>
+
+                <div class="controls-right">
+
+                    <!-- Botão de Configuração -->
+                    <div class="configs" style="display: none">
+                        
+                    <button class="transparent config" id="config-button">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m2.344 15.271 2 3.46a1 1 0 0 0 1.366.365l1.396-.806c.58.457 1.221.832 1.895 1.112V21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1.598a8.094 8.094 0 0 0 1.895-1.112l1.396.806c.477.275 1.091.11 1.366-.365l2-3.46a1.004 1.004 0 0 0-.365-1.366l-1.372-.793a7.683 7.683 0 0 0-.002-2.224l1.372-.793c.476-.275.641-.89.365-1.366l-2-3.46a1 1 0 0 0-1.366-.365l-1.396.806A8.034 8.034 0 0 0 15 4.598V3a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v1.598A8.094 8.094 0 0 0 7.105 5.71L5.71 4.904a.999.999 0 0 0-1.366.365l-2 3.46a1.004 1.004 0 0 0 .365 1.366l1.372.793a7.683 7.683 0 0 0 0 2.224l-1.372.793c-.476.275-.641.89-.365 1.366zM12 8c2.206 0 4 1.794 4 4s-1.794 4-4 4-4-1.794-4-4 1.794-4 4-4z" /></svg>
+                        </button>
+                        <!-- Popup (Modal) -->
+                        <div id="config-popup" class="popup">
+
+                            <div class="popup-conteiner">
+                                <div class="popup-top">
+                                    <svg class="icon back" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z" /></svg>
+                                    <span>Configurações</span>
+                                    <span class="popup-close">&times;</span>
+
+                                </div>
+                                <div class="popup-content">
+                                    <div class="options">
+                                        <ul>
+                                            <li>
+                                                <img src="assets/images/filtro.png" alt="Opção 1" class="option-icon">
+                                                <span>Qualidade</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="qualities-conteiner" id="qualities">
+                                        <form class="qualities-form">
+                                            
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="transparent fullscreen" id="fullscreenBtn">
+                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 5h5V3H3v7h2zm5 14H5v-5H3v7h7zm11-5h-2v5h-5v2h7zm-2-4h2V3h-7v2h5z"/></svg>
+                     </button>
+                    
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Área do Chat -->
+        <div class="live-chat" id="chat">
+            <div class="top-bar">
+                Chat
+            </div>
+            <div class="messages-conteiner">
+                <div id="messages">
+                    
+                </div>
+                <div class="back-down">
+                        1 Mensagens abaixo.
+                    </div>
+            </div>
+        </div>
+        <script src="https://player.twitch.tv/js/embed/v1.js"></script>
+
+        <!-- Adicionando o Firebase SDK -->
+        <script type="module" src="scripts/index.js"></script>
+        <script src="https://kit.fontawesome.com/575b6bb4cd.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/eruda@2.11.3/eruda.min.js"></script>
+<script>eruda.init();</script>
+    </body>
+
+</html>
