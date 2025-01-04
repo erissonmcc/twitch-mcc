@@ -77,7 +77,6 @@ const db = admin.firestore(); // Firebase Firestore
 // Supondo que você tenha o `accessToken` da Twitch
 await db.collection('users').doc(firebaseUser.uid).set({
     accessToken: tokenResponse.data.access_token,
-    refreshToken: tokenResponse.data.refresh_token,
     accessTokenExpiresAt: Date.now() + tokenResponse.data.expires_in * 1000, // Armazenando o tempo de expiração
 }, { merge: true });
 
@@ -102,7 +101,7 @@ console.log('Access token armazenado no Firestore para o usuário:', firebaseUse
 
         // Criando ou autenticando o usuário no Firebase usando o UID do usuário da Twitch
         const firebaseToken = await admin.auth().createCustomToken(firebaseUser.uid);
-        console.log(firebaseToken);
+        console.log(fire
         // Retorna o token do Firebase para o cliente
         return {
             statusCode: 200,
