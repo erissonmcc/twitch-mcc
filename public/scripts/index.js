@@ -35,7 +35,6 @@ const clientId = '5fyofmchlg3budslz7ivuouz0u8cff';
 
 // Função para processar o login com a Twitch e chamar o backend
 export function loginWithTwitch() {
-    // Substitua a URL abaixo pela URL do seu endpoint no Netlify
     const authUrl = 'login.html';
 
     // Iniciar o processo de login na Twitch (deve redirecionar o usuário para o login da Twitch)
