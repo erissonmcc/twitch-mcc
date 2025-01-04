@@ -6,44 +6,88 @@
     <title>Login com Twitch</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f5f5f5;
-        }
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f4f8;
+}
 
-        .login-container {
-            text-align: center;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+.login-container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 380px;
+    box-sizing: border-box;
+}
 
-        .login-button {
-            background-color: #6441a5;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            text-transform: uppercase;
-        }
+.login-container h1 {
+    margin: 0;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
 
-        .login-button:hover {
-            background-color: #4e3287;
-        }
+p {
+    margin: 0;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.login-button {
+    background-color: #6441a5;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+}
+
+.login-button img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+.login-button:hover {
+    background-color: #4e3287;
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 20px;
+        width: 80%;
+        max-width: none;
+    }
+
+    .login-container h2 {
+        font-size: 20px;
+    }
+
+    .login-button {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}
+
     </style>
 </head>
 <body>
     <div class="login-container">
         <h1>Login com Twitch</h1>
         <p>Faça login para acessar sua conta Twitch</p>
-        <button class="login-button" onclick="loginWithTwitch()">Entrar com Twitch</button>
+        <button class="login-button" onclick="loginWithTwitch()"><img src="assets/images/twitch.png"></img>Continuar com Twitch</button>
     </div>
 
     <script>

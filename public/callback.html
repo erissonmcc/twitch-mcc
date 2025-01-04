@@ -6,48 +6,163 @@
     <title>Login com Twitch - Callback</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100%;
+            height: 100vh;
             margin: 0;
-            background-color: #f5f5f5;
+            background-color: #f0f4f8;
         }
 
+        h2 {
+            margin: 0;
+        }
+
+        p {
+            margin: 0;
+        }
         .callback-container {
             position: absolute;
-            top: 45%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
+            background-color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
             box-sizing: border-box;
+        }
+
+        .callback-container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
         }
 
         .loading {
             font-size: 18px;
-            color: #333;
+            color: #007bff;
+            font-weight: 500;
+            margin-top: 15px;
         }
 
         .error {
-            color: red;
+            color: #e74c3c;
             font-size: 18px;
+            font-weight: 500;
+            margin-top: 15px;
         }
 
         .success {
-            color: green;
+            color: #2ecc71;
             font-size: 18px;
+            font-weight: 500;
+            margin-top: 15px;
+        }
+
+@media (max-width: 480px) {
+            .callback-container {
+                padding: 20px;
+                width: 80%;
+                max-width: none;
+            }
+
+            .callback-container h2 {
+                font-size: 20px;
+            }
+
+            .loading, .error, .success {
+                font-size: 16px;
+            }
+        }
+
+        .loading-spinner {
+            position: relative;
+            margin: 0 auto;
+            width: 50px;
+            height: 50px;
+        }
+        .loading-spinner:before {
+            content: '';
+            display: block;
+            padding-top: 100%;
+        }
+        .loading-spinner__circle-svg {
+            animation: loading-spinner-rotate 1.28973s linear infinite;
+            height: 100%;
+            transform-origin: center center;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+        .loading-spinner__circle-stroke {
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+            animation: loading-spinner-dash 2s ease-in-out infinite, loading-spinner-color 8s ease-in-out infinite;
+            stroke-linecap: round;
+            stroke-width: 4px;
+        }
+@keyframes loading-spinner-rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+@keyframes loading-spinner-dash {
+            0% {
+                stroke-dasharray: 1, 200;
+                stroke-dashoffset: 0;
+            }
+            50% {
+                stroke-dasharray: 89, 200;
+                stroke-dashoffset: -35px;
+            }
+            100% {
+                stroke-dasharray: 89, 200;
+                stroke-dashoffset: -124px;
+            }
+        }
+@keyframes loading-spinner-color {
+            100%,
+            0% {
+                stroke: #fff;
+            }
+        }
+
+        .loader svg {
+            width: 50px;
+            height: 50px;
+        }
+        .error-svg, .success-svg {
+            display: none;
+        }
+        
+        .loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
         }
     </style>
 </head>
 <body>
     <div class="callback-container">
-        <h1>Processando seu login...</h1>
+        <div class="loader">
+            <svg class="error-svg" fill="#e74c3c" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM13 17h-2v-2h2v2zm0-4h-2V7h2v6z" /></svg>
+            <svg class="success-svg" fill="#2ecc71" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1.999 14.413-3.713-3.705L7.7 11.292l2.299 2.295 5.294-5.294 1.414 1.414-6.706 6.706z" /></svg>
+            <div class="loading-spinner">
+                <svg class="loading-spinner__circle-svg" viewBox="25 25 50 50">
+                    <circle class="loading-spinner__circle-stroke" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                </svg>
+            </div>
+        </div>
         <p id="statusMessage" class="loading">
             Estamos verificando suas credenciais, por favor aguarde.
         </p>
@@ -79,7 +194,7 @@
         // Inicializar o Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        
+
         const isLocal = window.location.hostname === 'localhost';
         const netlifyEndpoit = isLocal ? "http://localhost:8888/.netlify/functions": "https://twitch-mcc.netlify.app/.netlify/functions";
 
@@ -95,8 +210,10 @@
             const code = getCodeFromUrl();
 
             if (!code) {
+                document.querySelector('.loading-spinner').style.display = 'none';
                 document.getElementById('statusMessage').textContent = 'Erro: Código de autorização não encontrado.';
                 document.getElementById('statusMessage').classList.add('error');
+                document.querySelector('.error-svg').style.display = 'block';
                 return;
             }
 
@@ -108,9 +225,11 @@
                 data = await response.json();
 
                 if (response.ok) {
+                    document.querySelector('.loading-spinner').style.display = 'none';
                     document.getElementById('statusMessage').textContent = `Login bem-sucedido, ${data.message}`;
                     document.getElementById('statusMessage').classList.add('success');
 
+                    document.querySelector('.success-svg').style.display = 'block';
                     // Autentica o usuário no Firebase com o token personalizado
                     const firebaseToken = data.firebaseToken;
 
@@ -123,16 +242,22 @@
                             window.location.href = "/"; // Redireciona para a página inicial ou dashboard
                         }, 2000);
                     } catch (authError) {
+                        document.querySelector('.loading-spinner').style.display = 'none';
                         document.getElementById('statusMessage').textContent = `Erro ao autenticar no Firebase: ${authError.message}`;
                         document.getElementById('statusMessage').classList.add('error');
+                        document.querySelector('.error-svg').style.display = 'block';
                     }
                 } else {
+                    document.querySelector('.loading-spinner').style.display = 'none';
                     document.getElementById('statusMessage').textContent = `Erro ao processar login. Tente novamente mais tarde. ${data}`;
                     document.getElementById('statusMessage').classList.add('error');
+                    document.querySelector('.error-svg').style.display = 'block';
                 }
             } catch (error) {
+                document.querySelector('.loading-spinner').style.display = 'none';
                 document.getElementById('statusMessage').textContent = `Erro ao conectar com o servidor. Tente novamente mais tarde.`;
                 document.getElementById('statusMessage').classList.add('error');
+                document.querySelector('.error-svg').style.display = 'block';
             }
         }
 
