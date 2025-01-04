@@ -132,7 +132,7 @@
 @keyframes loading-spinner-color {
             100%,
             0% {
-                stroke: #fff;
+                stroke: #000;
             }
         }
 
@@ -195,7 +195,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        const isLocal = window.location.hostname === 'localhost';
+        const isLocal = false;
         const netlifyEndpoit = isLocal ? "http://localhost:8888/.netlify/functions": "https://twitch-mcc.netlify.app/.netlify/functions";
 
         // Função para pegar o código de autorização da URL
@@ -221,7 +221,7 @@
 
             try {
                 // Redireciona para a função Lambda do Netlify com o código
-                const response = await fetch(`${netlifyEndpoit}auth?code=${code}`);
+                const response = await fetch(`${netlifyEndpoit}/auth?code=${code}`);
                 data = await response.json();
 
                 if (response.ok) {
@@ -249,7 +249,7 @@
                     }
                 } else {
                     document.querySelector('.loading-spinner').style.display = 'none';
-                    document.getElementById('statusMessage').textContent = `Erro ao processar login. Tente novamente mais tarde. ${data}`;
+                    document.getElementById('statusMessage').textContent = `Erro ao processar login. Tente novamente mais tarde.`;
                     document.getElementById('statusMessage').classList.add('error');
                     document.querySelector('.error-svg').style.display = 'block';
                 }
