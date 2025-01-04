@@ -48,40 +48,50 @@
 <body>
     <div class="callback-container">
         <h1>Processando seu login...</h1>
-        <p id="statusMessage" class="loading">Estamos verificando suas credenciais, por favor aguarde.</p>
+        <p id="statusMessage" class="loading">
+            Estamos verificando suas credenciais, por favor aguarde.
+        </p>
     </div>
 
     <!-- Script para Firebase -->
     <script type="module">
         // Importando as partes necessárias do Firebase
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
-        import { getAuth, signInWithCustomToken } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+        import {
+            initializeApp
+        } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import {
+            getAuth,
+            signInWithCustomToken
+        } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
 
         // Configuração do Firebase (substitua pelos seus dados do Firebase)
-const firebaseConfig = {
-  apiKey: "AIzaSyDD5UGApGmnddV1nCkibQi0yC6ZOpPhWqA",
-  authDomain: "linen-diorama-427712-c4.firebaseapp.com",
-  projectId: "linen-diorama-427712-c4",
-  storageBucket: "linen-diorama-427712-c4.firebasestorage.app",
-  messagingSenderId: "250158598373",
-  appId: "1:250158598373:web:b1637a75fd41fc6f936c0c",
-  measurementId: "G-3JFG7302YG"
-};
+        const firebaseConfig = {
+            apiKey: "AIzaSyDD5UGApGmnddV1nCkibQi0yC6ZOpPhWqA",
+            authDomain: "linen-diorama-427712-c4.firebaseapp.com",
+            projectId: "linen-diorama-427712-c4",
+            storageBucket: "linen-diorama-427712-c4.firebasestorage.app",
+            messagingSenderId: "250158598373",
+            appId: "1:250158598373:web:b1637a75fd41fc6f936c0c",
+            measurementId: "G-3JFG7302YG"
+        };
 
 
         // Inicializar o Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         
+        const isLocal = window.location.hostname === 'localhost';
+        const netlifyEndpoit = isLocal ? "http://localhost:8888/.netlify/functions": "https://twitch-mcc.netlify.app/.netlify/functions";
+
         // Função para pegar o código de autorização da URL
         function getCodeFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('code'); // Pega o código de autorização
         }
-        
+
         // Chama a função para processar o código de autorização via função Lambda no Netlify
         async function processLogin() {
-         
+
             const code = getCodeFromUrl();
 
             if (!code) {
@@ -89,18 +99,18 @@ const firebaseConfig = {
                 document.getElementById('statusMessage').classList.add('error');
                 return;
             }
-            
+
             let data;
 
             try {
                 // Redireciona para a função Lambda do Netlify com o código
-                const response = await fetch(`http://localhost:8888/.netlify/functions/auth?code=${code}`);
+                const response = await fetch(`${netlifyEndpoit}auth?code=${code}`);
                 data = await response.json();
-                
+
                 if (response.ok) {
                     document.getElementById('statusMessage').textContent = `Login bem-sucedido, ${data.message}`;
                     document.getElementById('statusMessage').classList.add('success');
-                    
+
                     // Autentica o usuário no Firebase com o token personalizado
                     const firebaseToken = data.firebaseToken;
 
