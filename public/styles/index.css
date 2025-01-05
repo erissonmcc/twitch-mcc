@@ -275,8 +275,14 @@ h1 {
     color: white;
     font-size: 0.9rem;
     font-weight: 500;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
 }
 
+#backText {
+    margin-left: 5px;
+}
 
 .live-chat {
     flex: 1;
