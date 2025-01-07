@@ -33,7 +33,7 @@ body {
         color: #e6e6e6;
     }
 
-    .stream-info .avatar-conteiner, .stream-item .thumbnail {
+    .stream-info .avatar-conteiner, .thumbnail-conteiner {
         background-color: #333333;
     }
 
@@ -83,14 +83,14 @@ h1 {
 
 .stream-item .thumbnail {
     width: 100%;
-    height: 30%;
+    height: auto;
 }
 
-.stream-item .thumbnail {
+.thumbnail-conteiner {
     width: 100%;
-    height: 30%;
+    height: 230px;
 }
-
+ 
 .stream-info .avatar {
     width: 40px;
     height: 40px;
@@ -537,8 +537,10 @@ button.toggle {
 
 [type="radio"]:checked::before {
     font-family: 'Font Awesome 5 Free';
-    content: '\f00c'; /* Unicode do ícone FontAwesome */
-    font-weight: 900; /* Certifique-se de usar o peso correto */
+    content: '\f00c';
+    /* Unicode do ícone FontAwesome */
+    font-weight: 900;
+    /* Certifique-se de usar o peso correto */
     color: white;
     font-size: 10px;
     position: absolute;
@@ -602,64 +604,68 @@ form {
 }
 
 @keyframes swipeLeftOut {
-  0% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
 }
 
 @keyframes swipeLeftIn {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 
 @keyframes swipeRightOut {
-  0% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
 }
 
 @keyframes swipeRightIn {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 @keyframes slideDownInNoP {
     0% {
+        opacity: 0;
         transform: translateY(-100%);
     }
     100% {
+        opacity: 1;
         transform: translateY(0);
     }
 }
 
 @keyframes slideUpInNoP {
     0% {
+        opacity: 1;
         transform: translateY(0);
     }
     100% {
+        opacity: 0;
         transform: translateY(-100%);
     }
 }
@@ -695,4 +701,8 @@ form {
 .offline p {
     font-weight: 500;
     font-size: 1rem;
+}
+
+img.lazy {
+    opacity: 0;
 }
