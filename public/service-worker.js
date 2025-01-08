@@ -1,9 +1,10 @@
-const CACHE_NAME = 'v1_cache';
+const CACHE_VERSION = 'v0.1';
+const CACHE_NAME = `cache_${CACHE_VERSION}`;
 const urlsToCache = [
   '/',
   '/index.html',
   'styles/index.css',
-  'scripts/index.js',
+  'scripts/index.min.js',
   'assets/images/icon.png'
 ];
 
@@ -26,7 +27,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (!cacheWhitelist.includes(cacheName)) {
-            return caches.delete(cacheName);
+            return caches.delete(cacheName);  // Limpa caches antigos
           }
         })
       );
