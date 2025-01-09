@@ -34,5 +34,5 @@
 
 [[redirects]]
   from = "/channel/*"
-  to = "/index.html"
+  to = "/"
   status = 200
