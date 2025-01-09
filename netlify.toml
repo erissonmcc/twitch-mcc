@@ -3,6 +3,36 @@
   publish = "public"
 
 [[redirects]]
+  from = "/index"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/index.html"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/login"
+  to = "/login.html"
+  status = 200
+
+[[redirects]]
+  from = "/login.html"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/callback"
+  to = "/callback.html"
+  status = 200
+
+[[redirects]]
+  from = "/callback.html"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
   from = "/*"
-  to = "/:splat.html"
+  to = "/index.html"
   status = 200
