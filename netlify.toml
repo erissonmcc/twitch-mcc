@@ -33,6 +33,6 @@
   status = 404
 
 [[redirects]]
-  from = "/*"
+  from = "/channel/*"
   to = "/index.html"
   status = 200
