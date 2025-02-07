@@ -2,7 +2,7 @@
   "name": "Twitch Mcc",
   "short_name": "Twitch Mcc",
   "description": "Aplicativo da Twitch",
-  "start_url": "/",
+  "start_url": "/index.html?app=true",
   "display": "standalone",
   "background_color": "#8716D9",
   "theme_color": "#0d0d0d",
