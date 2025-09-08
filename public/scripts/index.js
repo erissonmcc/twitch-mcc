@@ -395,12 +395,27 @@ function ce() {
 });
 
 se.addEventListener(Twitch.Embed.VIDEO_READY, () => {
-  const player = se.getPlayer();
-  
-  // Tenta tocar o vídeo
-  player.play().catch((err) => {
-    console.log("Autoplay bloqueado, o usuário precisa interagir:", err);
-  });
+  // Tenta obter o player várias vezes até estar definido
+  let attempts = 0;
+  const maxAttempts = 10;
+
+  const checkPlayer = setInterval(() => {
+    const player = se.getPlayer();
+    if (player) {
+      clearInterval(checkPlayer);
+
+      // Tenta tocar o vídeo
+      player.play().catch((err) => {
+        console.log("Autoplay bloqueado ou erro:", err);
+      });
+    } else {
+      attempts++;
+      if (attempts >= maxAttempts) {
+        clearInterval(checkPlayer);
+        console.log("Player não inicializado a tempo.");
+      }
+    }
+  }, 200); // verifica a cada 200ms
 });
     const n = {
       play: '<path d="M7 6v12l10-6z"/>',
