@@ -330,9 +330,9 @@ async function J() {
       })(user.uid);
 
       B("Tempo para iniciar");
-    } else if (navigator.onLine) {
+    } else {
       console.log("Usuário não está autenticado", user);
-      //loginWithTwitch();
+      window.location.href = "login.html"
     }
   });
 })();
