@@ -382,8 +382,9 @@ window.addEventListener("popstate", (function(e) {
 let se, ie = !0;
 
 function ce() {
-  try {
     let t;
+    
+  try {
     const se = new Twitch.Embed("twitch-embed", {
   width: "100%",
   height: "100%",
