@@ -442,6 +442,7 @@ function ce() {
     $("Erro ao iniciar embed:", o)
   }
 }
+
 document.querySelector(".reload").addEventListener("click", (() => {
   Ye(), ie = !0;
   const e = document.getElementById("miniature"),
