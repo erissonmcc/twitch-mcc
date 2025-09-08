@@ -372,7 +372,7 @@ async function oe() {
 
 function ae(e) {
     document.getElementById("miniature").style.display = "none";
-  //document.getElementById("miniature").innerHTML = `\n    <div class="loading-spinner">\n    <svg class="loading-spinner__circle-svg" viewBox="25 25 50 50">\n    <circle class="loading-spinner__circle-stroke" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />\n    </svg>\n    </div>\n    <img class="lazy" src="${e.thumbnail.replace("{width}","1280").replace("{height}","720")}" alt="Miniatura de ${e.userName}">\n    `.trim();
+  document.getElementById("miniature").innerHTML = `\n    <div class="loading-spinner">\n    <svg class="loading-spinner__circle-svg" viewBox="25 25 50 50">\n    <circle class="loading-spinner__circle-stroke" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />\n    </svg>\n    </div>\n    <img class="lazy" src="${e.thumbnail.replace("{width}","1280").replace("{height}","720")}" alt="Miniatura de ${e.userName}">\n    `.trim();
   document.querySelector(".info").innerHTML = `\n    <div class="avatar-conteiner">\n    <img class="avatar lazy" src="${e.profileImage}">\n    </div>\n\n    <div class="info-text">\n    <h2>${e.userName}</h2>\n    <p>${e.title}</p>\n    <div class="viewers"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"/></svg> <span>${e.viewers} espectadores</span></div>\n    </div>\n\n    `
 }
 window.addEventListener("popstate", (function(e) {
