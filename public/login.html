@@ -101,7 +101,7 @@
     function loginWithTwitch() {
         // Obtém o client ID e a URL de redirecionamento (a URL da função Lambda do Netlify)
         const clientId = '5fyofmchlg3budslz7ivuouz0u8cff'; // Substitua com seu Client ID da Twitch
-        const redirectUri = 'https://localhost:4443/public/callback.html'; // URL do redirecionamento
+        const redirectUri = 'https://twitch-mcc.netlify.app/callback.html'; // URL do redirecionamento
         const responseType = 'code'; // Tipo de resposta, estamos usando o código de autorização
         const scope = 'user:read:email user:read:follows user:read:subscriptions channel:read:subscriptions channel:manage:moderators channel:manage:broadcast clips:edit moderation:read user:edit user:edit:broadcast user:manage:blocked_users channel:manage:videos channel:read:editors user:read:broadcast analytics:read:games moderator:manage:automod chat:edit chat:read whispers:read whispers:edit';
 
