@@ -416,7 +416,7 @@ se.addEventListener(Twitch.Embed.VIDEO_READY, () => {
     se.addEventListener(Twitch.Embed.VIDEO_PLAY, (function() {
       if (!ie) return;
       Fe(), ie = !1;
-      document.querySelectorAll('.controls, .info').forEach(el => el.style.display = 'flex');
+      document.querySelectorAll('.controls, .info, .overlay-live').forEach(el => el.style.display = 'flex');
       document.getElementById("miniature").style.display = "none", t.setQuality("auto"), document.querySelector(".configs").style.display = "block";
       const e = t.getQualities();
       $("Qualidades", e);
