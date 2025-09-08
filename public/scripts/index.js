@@ -391,7 +391,7 @@ function ce() {
       width: "100%",
       height: "100%",
       channel: F,
-      parent: ["localhost"],
+      parent: ["twitch-mcc.netlify.app"],
       layout: "video",
       controls: !1,
       muted: !1,
