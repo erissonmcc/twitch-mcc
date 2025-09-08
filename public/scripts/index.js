@@ -54,11 +54,7 @@ const $ = function(...e) {
   B = function(...e) {
     L && console.timeEnd(...e)
   };
-new URLSearchParams(window.location.search).get("app") || document.body.classList.add("app"), "serviceWorker" in navigator && navigator.serviceWorker.register("/service-worker.js").then((function(e) {
-  $("Service Worker registrado com sucesso:", e)
-})).catch((function(e) {
-  $("Falha ao registrar o Service Worker:", e)
-})), navigator.onLine || (document.querySelector(".loader").style.display = "none", document.querySelector(".offline").style.display = "flex");
+
 const M = document.querySelector(".overlay-live"),
   A = document.getElementById("twitch-embed"),
   _ = new Hammer(M);
