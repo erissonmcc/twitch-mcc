@@ -383,18 +383,25 @@ let se, ie = !0;
 function ce() {
   try {
     let t;
-    se = new Twitch.Embed("twitch-embed", {
-      width: "100%",
-      height: "100%",
-      channel: F,
-      parent: ["twitch-mcc.netlify.app"],
-      layout: "video",
-      controls: false,
-      muted: true,
-      autoplay: true,
-    }), se.addEventListener(Twitch.Embed.VIDEO_READY, (() => {
-      t = se.getPlayer()
-    }));
+    const se = new Twitch.Embed("twitch-embed", {
+  width: "100%",
+  height: "100%",
+  channel: F,
+  parent: ["twitch-mcc.netlify.app"],
+  layout: "video",
+  controls: false,
+  muted: true,
+  autoplay: true,
+});
+
+se.addEventListener(Twitch.Embed.VIDEO_READY, () => {
+  const player = se.getPlayer();
+  
+  // Tenta tocar o vídeo
+  player.play().catch((err) => {
+    console.log("Autoplay bloqueado, o usuário precisa interagir:", err);
+  });
+});
     const n = {
       play: '<path d="M7 6v12l10-6z"/>',
       pause: '<path d="M8 7h3v10H8zm5 0h3v10h-3z"/>',
