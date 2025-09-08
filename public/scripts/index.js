@@ -396,13 +396,7 @@ function ce() {
 });
 
 se.addEventListener(Twitch.Embed.VIDEO_READY, () => {
-  // Tenta obter o player várias vezes até estar definido
-  let attempts = 0;
-  const maxAttempts = 10;
-
-  const checkPlayer = setInterval(() => {
-    const player = se.getPlayer();
-     player.play().catch((err) => {
+   player.play().catch((err) => {
         console.log("Autoplay bloqueado ou erro:", err);
       });
      
