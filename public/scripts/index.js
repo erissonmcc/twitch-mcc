@@ -394,8 +394,8 @@ function ce() {
       parent: ["twitch-mcc.netlify.app"],
       layout: "video",
       controls: !1,
-      muted: !1,
-      autoplay: !0
+      muted: true,
+      autoplay: true,
     }), se.addEventListener(Twitch.Embed.VIDEO_READY, (() => {
       t = se.getPlayer()
     }));
