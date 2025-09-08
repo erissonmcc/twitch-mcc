@@ -396,7 +396,9 @@ function ce() {
 });
 
 se.addEventListener(Twitch.Embed.VIDEO_READY, () => {
-   player.play().catch((err) => {
+      t = se.getPlayer()
+    
+   t.play().catch((err) => {
         console.log("Autoplay bloqueado ou erro:", err);
       });
      
