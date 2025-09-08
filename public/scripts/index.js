@@ -416,6 +416,8 @@ se.addEventListener(Twitch.Embed.VIDEO_READY, () => {
     se.addEventListener(Twitch.Embed.VIDEO_PLAY, (function() {
       if (!ie) return;
       Fe(), ie = !1;
+      document.querySelector('.controls').style.display = 'flrx';
+      
       document.getElementById("miniature").style.display = "none", t.setQuality("auto"), document.querySelector(".configs").style.display = "block";
       const e = t.getQualities();
       $("Qualidades", e);
