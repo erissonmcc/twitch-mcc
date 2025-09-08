@@ -1021,3 +1021,5 @@ Xe.addEventListener("touchmove", (e => {
     Qe.style.transform = "translateY(0px)", Qe.style.animation = "none"
   }), 300))
 }));
+
+console.log('HAHAHAHAHA');
